@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Earn Raftaar - Agency Support</title>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Strict No-Scroll Guarantee */
+            background-color: #03000a;
+            /* Hexagonal & Star particle feel via CSS gradients */
+            background-image: 
+                radial-gradient(circle at 50% 30%, #1c003d 0%, #03000a 70%),
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
+            background-size: 100% 100%, 60px 60px, 90px 90px;
+            background-position: 0 0, 10px 10px, 40px 40px;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Perfectly proportioned container for 4" to 6.7" screens */
+        .app-container {
+            width: 100%;
+            max-width: 430px;
+            height: 100vh;
+            padding: 2.5vh 4vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(147, 51, 234, 0.2);
+        }
+
+        /* Light streaks like the original image */
+        .app-container::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            width: 120%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #bc3df0, transparent);
+            transform: rotate(-15deg);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .app-container::after {
+            content: '';
+            position: absolute;
+            bottom: 25%;
+            width: 120%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #bc3df0, transparent);
+            transform: rotate(15deg);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* --- HEADER SECTION --- */
+        .brand-header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .logo-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #ff2222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(255,34,34,0.5);
+        }
+        .logo-circle span {
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: -1px;
+        }
+        .logo-circle span em {
+            color: #ff2222;
+            font-style: normal;
+        }
+        .brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+        .brand-divider {
+            color: #555;
+            font-size: 18px;
+            margin: 0 4px;
+        }
+        .brand-agency {
+            font-size: 18px;
+            font-weight: 700;
+            color: #d946ef;
+        }
+
+        .online-pill {
+            background: rgba(147, 51, 234, 0.15);
+            border: 1px solid #c084fc;
+            border-radius: 30px;
+            padding: 3px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #f3e8ff;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+        }
+        .online-pill i {
+            color: #c084fc;
+            font-size: 12px;
+        }
+
+        /* --- HERO TEXT SECTION --- */
+        .hero-section {
+            width: 100%;
+            text-align: center;
+        }
+        .top-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            color: #e2e8f0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .main-headline {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-top: 4px;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+        }
+        .main-headline span {
+            color: #c084fc;
+        }
+        .whatsapp-instruction {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 10px;
+            color: #ffffff;
+        }
+        .whatsapp-instruction span {
+            color: #22c55e;
+            text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+        }
+        .pointing-hand {
+            font-size: 20px;
+            margin-top: 2px;
+            animation: bounce 0.8s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(4px); }
+        }
+
+        /* --- MAIN CTA BUTTON (THE EXACT GLOWING GREEN) --- */
+        .cta-wrapper {
+            width: 100%;
+            padding: 0 4px;
+        }
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+            border: 2px solid #34d399;
+            border-radius: 50px;
+            padding: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.5), inset 0 2px 4px rgba(255,255,255,0.4);
+            transition: all 0.1s ease;
+        }
+        .whatsapp-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+        .whatsapp-btn i {
+            font-size: 26px;
+            margin-right: 10px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        /* --- 5 PURPLE GRID ITEMS --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            width: 100%;
+        }
+        .grid-box {
+            background: rgba(15, 3, 35, 0.7);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            border-radius: 10px;
+            padding: 8px 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .grid-box i {
+            font-size: 20px;
+            color: #c084fc;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
+        }
+        /* Custom image layout/avatar support for item 1 like original */
+        .grid-box .avatar-placeholder {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #4a044e;
+            border: 1px solid #c084fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+        .grid-box .avatar-placeholder i {
+            font-size: 11px;
+            margin-bottom: 0;
+            color: #f3e8ff;
+        }
+        .grid-box span {
+            font-size: 7.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.2;
+            color: #e2e8f0;
+        }
+        .grid-box.special span em {
+            color: #f472b6;
+            font-style: normal;
+        }
+        /* Small verification badge inside grid boxes */
+        .check-badge {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            font-size: 6px !important;
+            color: #a855f7 !important;
+            background: #fff;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- TRUST FACTOR BAR --- */
+        .trust-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0;
+        }
+        .trust-card {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .trust-card .icon-shield {
+            font-size: 16px;
+            color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+            padding: 4px;
+            border-radius: 4px;
+        }
+        .trust-card .icon-bolt { color: #eab308; font-size: 16px;}
+        .trust-card .icon-users { color: #a855f7; font-size: 16px;}
+        .trust-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .trust-main {
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ffffff;
+            line-height: 1;
+        }
+        .trust-sub {
+            font-size: 8px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* --- AVATARS & RATING ROW --- */
+        .rating-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+        .avatar-group {
+            display: flex;
+            align-items: center;
+        }
+        .user-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1.5px solid #a855f7;
+            background: #1e1b4b;
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .user-avatar:first-child {
+            margin-left: 0;
+        }
+        .user-avatar i {
+            font-size: 10px;
+            color: #cbd5e1;
+        }
+        .rating-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .stars-row {
+            color: #eab308;
+            font-size: 11px;
+            display: flex;
+            gap: 1px;
+        }
+        .score-text {
+            font-size: 12px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 1px;
+        }
+        .score-text span {
+            color: #c084fc;
+        }
+
+        /* --- MICRO FOOTER BAR --- */
+        .bottom-footer {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding-top: 6px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .footer-cell i {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+        }
+        .footer-cell span {
+            font-size: 8px;
+            color: #64748b;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Dynamic scaling adjustments for very small screens (like 4-inch iPhone SE) */
+        @media (max-height: 580px) {
+            .app-container { padding: 1.5vh 3vw; }
+            .main-headline { font-size: 22px; }
+            .whatsapp-btn { padding: 9px; font-size: 15px; }
+            .whatsapp-btn i { font-size: 20px; }
+            .grid-box { padding: 4px 1px; }
+            .grid-box i { font-size: 16px; }
+            .grid-box span { font-size: 7px; }
+            .trust-row, .rating-container { margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <div class="brand-header">
+            <div class="logo-row">
+                <div class="logo-circle">
+                    <span>E<em>R</em></span>
+                </div>
+                <div class="brand-name">EARN RAFTAAR</div>
+                <div class="brand-divider">|</div>
+                <div class="brand-agency">AGENCY SUPPORT</div>
+            </div>
+            <div class="online-pill">
+                <i class="fa-solid fa-headset animate-pulse"></i> ONLINE SUPPORT 24/7
+            </div>
+        </div>
+
+        <!-- HERO SECTION -->
+        <div class="hero-section">
+            <div class="top-tagline">— NEW HOSTING ID CREATE SUPPORT —</div>
+            <h1 class="main-headline">HOST ID & AGENCY<br><span>SETUP PROBLEM?</span></h1>
+            <div class="whatsapp-instruction">CONTACT US FROM <span>WHATSAPP</span></div>
+            <div class="pointing-hand">👇👇</div>
+        </div>
+
+        <!-- WHATSAPP CTA BUTTON -->
+        <div class="cta-wrapper">
+            <a href="https://wa.me/919353670331?text=hii" class="whatsapp-btn" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> MESSAGE NOW WHATSAPP
+            </a>
+        </div>
+
+        <!-- 5 GRID FEATURE ITEMS -->
+        <div class="grid-container">
+            <!-- Box 1 with Avatar Profile Support -->
+            <div class="grid-box">
+                <div class="avatar-placeholder">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <span>NEW HOST ID<br>ACTIVATION</span>
+                <i class="fa-solid fa-circle-check check-badge"></i>
+            </div>
+            <!-- Box 2 -->
+            <div class="grid-box">
+                <i class="fa-solid fa-address-card"></i>
+                <span>AGENCY<br>REGISTRATION</span>
+                <i class="fa-solid fa-circle-check check-badge"></i>
+            </div>
+            <!-- Box 3 -->
+            <div class="grid-box special">
+                <i class="fa-solid fa-wallet"></i>
+                <span>PAYMENT &<br>WITHDRAWAL<br><em>ISSUE</em></span>
+            </div>
+            <!-- Box 4 -->
+            <div class="grid-box">
+                <i class="fa-solid fa-lock"></i>
+                <span>LOGIN ISSUE<br>SUPPORT</span>
+            </div>
+            <!-- Box 5 -->
+            <div class="grid-box">
+                <i class="fa-solid fa-rocket"></i>
+                <span>FAST<br>SOLUTION</span>
+            </div>
+        </div>
+
+        <!-- TRUST FACTOR ROW -->
+        <div class="trust-row">
+            <div class="trust-card">
+                <i class="fa-solid fa-shield-halved icon-shield"></i>
+                <div class="trust-info">
+                    <span class="trust-main">100% SECURE</span>
+                    <span class="trust-sub">& Safe</span>
+                </div>
+            </div>
+            <div class="trust-card">
+                <i class="fa-solid fa-bolt icon-bolt"></i>
+                <div class="trust-info">
+                    <span class="trust-main">INSTANT</span>
+                    <span class="trust-sub">Response</span>
+                </div>
+            </div>
+            <div class="trust-card">
+                <i class="fa-solid fa-users icon-users"></i>
+                <div class="trust-info">
+                    <span class="trust-main">TRUSTED BY</span>
+                    <span class="trust-sub">Thousands</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RATING & AVATARS SECTION -->
+        <div class="rating-container">
+            <div class="avatar-group">
+                <div class="user-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+                <div class="user-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                <div class="user-avatar"><i class="fa-solid fa-user-ninja"></i></div>
+                <div class="user-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+            <div class="rating-details">
+                <div class="stars-row">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="score-text"><span>4.9/5</span> SUPPORT RATING</div>
+            </div>
+        </div>
+
+        <!-- MICRO FOOTER -->
+        <div class="bottom-footer">
+            <div class="footer-cell">
+                <i class="fa-solid fa-headset"></i>
+                <span>24/7 SUPPORT</span>
+            </div>
+            <div class="footer-cell">
+                <i class="fa-solid fa-shield-circle-check"></i>
+                <span>100% SAFE SERVICE</span>
+            </div>
+            <div class="footer-cell">
+                <i class="fa-solid fa-circle-bolt"></i>
+                <span>QUICK SOLUTION</span>
+            </div>
+            <div class="footer-cell">
+                <i class="fa-solid fa-trophy"></i>
+                <span>EXPERT TEAM</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
